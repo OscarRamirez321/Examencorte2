@@ -5,10 +5,18 @@
         </h2>
     </x-slot>
     <div class="py-8 max-w-4xl mx-auto">
-        <div class="mb-4 flex justify-end">
+        <div class="mb-4 flex justify-end space-x-2"> {{-- Added space-x-2 for spacing --}}
             <a href="{{ route('cities.create') }}"
                 class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
                 {{ __('Create City') }}
+            </a>
+            <a href="{{ route('cities.export.xls') }}"
+                class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+                Exportar XLS
+            </a>
+            <a href="{{ route('cities.export.csv') }}"
+                class="inline-block px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">
+                Exportar CSV
             </a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -24,7 +32,6 @@
                             {{ __('Edit') }}
                         </a>
                         @if (request('delete') == $city->id)
-                            <!-- Confirm Delete UI -->
                             <form action="{{ route('cities.destroy', $city->id) }}" method="POST" class="flex space-x-3">
                                 @csrf
                                 @method('DELETE')

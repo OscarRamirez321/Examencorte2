@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\City;
+use Maatwebsite\Excel\Facades\Excel; // Add this line
+use App\Exports\CitiesExport; // Add this line
 
 class CityController extends Controller
 {
@@ -107,6 +109,14 @@ class CityController extends Controller
             return redirect()->back()->with('error', 'Error al eliminar la ciudad: ' . $e->getMessage());
         }
     }
+ public function exportXls()
+    {
+        return Excel::download(new CitiesExport, 'cities.xlsx');
+    }
 
+    public function exportCsv()
+    {
+        return Excel::download(new CitiesExport, 'cities.csv');
+    }
     
 }

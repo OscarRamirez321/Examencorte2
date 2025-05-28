@@ -5,6 +5,9 @@ use App\Models\Citizen;
 use App\Models\City;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel; // Add this line
+use App\Exports\CitizensExport; // Add this line
+
 
 class CitizenController extends Controller
 {
@@ -118,5 +121,14 @@ class CitizenController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error al eliminar el ciudadano: ' . $e->getMessage());
         }
+    }
+     public function exportXls()
+    {
+        return Excel::download(new CitizensExport, 'citizens.xlsx');
+    }
+
+    public function exportCsv()
+    {
+        return Excel::download(new CitizensExport, 'citizens.csv');
     }
 }
