@@ -40,4 +40,4 @@ Route::post('/toggle-darkmode', function () {
     return back();
 })->name('toggle.darkmode');
 
-require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';  
